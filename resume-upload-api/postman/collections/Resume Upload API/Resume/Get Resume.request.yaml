@@ -1,0 +1,5 @@
+$kind: http-request
+name: Get Resume
+url: http://localhost:4000/api/v1/upload/resume
+method: GET
+order: 4228889494925244

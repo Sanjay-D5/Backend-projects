@@ -1,0 +1,5 @@
+$kind: http-request
+name: Get User
+url: http://localhost:4000/api/v1/auth/me
+method: GET
+order: 4427257123847425

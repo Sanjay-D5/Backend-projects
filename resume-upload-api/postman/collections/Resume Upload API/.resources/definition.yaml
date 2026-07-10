@@ -1,0 +1,8 @@
+$kind: collection
+name: Resume Upload API
+auth:
+  - id: 6b7b8bdf-132c-47ea-ad32-15ba5d8cbadf
+    type: bearer
+    name: Bearer Token
+    credentials:
+      token: Deletes the authenticated user's resume from both Cloudinary and MongoDB.
