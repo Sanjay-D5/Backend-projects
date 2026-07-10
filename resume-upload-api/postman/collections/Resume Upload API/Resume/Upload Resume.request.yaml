@@ -1,0 +1,26 @@
+$kind: http-request
+name: Upload Resume
+description: |-
+  Uploads a PDF resume.
+
+  Requirements:  
+  • Authenticated user  
+  • PDF only  
+  • Maximum size: 5MB
+
+  Returns:  
+  • Cloudinary URL  
+  • Extracted text  
+  • File metadata
+url: http://localhost:4000/api/v1/upload/resume
+method: POST
+body:
+  type: formdata
+  content:
+    - type: file
+      key: resume
+      src:
+        - /C:/Users/sanja/OneDrive/Documents/PDF/Resume.pdf
+      description: ""
+      disabled: false
+order: 1783673960999
