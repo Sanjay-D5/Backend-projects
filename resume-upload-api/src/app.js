@@ -37,10 +37,17 @@ app.use(morgan("dev"));
 app.use(apiLimiter);
 
 app.use("/api/v1/auth", authRouter);
-
 app.use("/api/v1/upload", resumeRoutes);
-
 app.use("/api/v1/health", healthRouter);
+
+// Root Route
+app.get("/", (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "Resume Upload API is running 🚀",
+        health: "/api/v1/health",
+    });
+});
 
 app.use(errorHandler);
 
