@@ -10,7 +10,7 @@ Regular users manage their own tasks. Admins can see every task, assign tasks to
 
 - Create, read and update tasks with title, description, status, priority and due date
 - **Role-based access control**: `user` and `admin` roles, enforced by a reusable `requireRole()` middleware
-- **Ownership checks**: users can only read and update tasks they own; admins can access all tasks
+- **Ownership checks**: users can read and update tasks they own or are assigned to; admins can access all tasks
 - **Task assignment**: admins can assign any task to another user
 - **Pagination, filtering and sorting** on the task list
 - **Admin stats** built with MongoDB aggregation: totals, counts by status and priority, and overdue tasks
@@ -66,13 +66,13 @@ task-manager-api/
 2. Protected requests send the access token as `Authorization: Bearer <token>`.
 3. `authMiddleware` verifies the token and attaches the user (including their role) to `req.user`.
 4. Admin-only routes add `requireRole("admin")`, which returns **403 Forbidden** for anyone else.
-5. Inside the task controllers, non-admins are limited to tasks where they are the `owner`.
+5. Inside the task controllers, non-admins are limited to tasks where they are the `owner` or the `assignedTo` user.
 
 | Action | User | Admin |
 |---|---|---|
 | Create a task | ✅ | ✅ |
-| List / view tasks | Own tasks only | All tasks |
-| Update a task | Own tasks only | Any task |
+| List / view tasks | Own + assigned tasks | All tasks |
+| Update a task | Own + assigned tasks | Any task |
 | Delete a task | ❌ | ✅ |
 | Assign a task | ❌ | ✅ |
 | View stats | ❌ | ✅ |

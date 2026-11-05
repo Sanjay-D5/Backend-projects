@@ -29,8 +29,9 @@ export const getAllTasks = async (req, res, next) => {
 
         const filter = {};
 
+        // Non-admins see tasks they created or tasks assigned to them
         if(req.user.role !== "admin"){
-            filter.owner = req.user.id;
+            filter.$or = [{ owner: req.user.id }, { assignedTo: req.user.id }];
         }
 
         if(status){
@@ -84,7 +85,8 @@ export const getTask = async (req, res, next) => {
 
         if (
             req.user.role !== "admin" &&
-            task.owner._id.toString() !== req.user.id
+            task.owner._id.toString() !== req.user.id &&
+            task.assignedTo._id.toString() !== req.user.id
         ) {
             return res.status(403).json({
                 success: false,
@@ -117,7 +119,8 @@ export const updateTask = async (req, res, next) => {
 
         if (
             req.user.role !== "admin" &&
-            task.owner.toString() !== req.user.id
+            task.owner.toString() !== req.user.id &&
+            task.assignedTo.toString() !== req.user.id
         ) {
             return res.status(403).json({
                 success: false,

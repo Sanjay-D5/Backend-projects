@@ -27,6 +27,12 @@ const userSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         default: 'user',
     },
+    // Hashed refresh token. Must be in the schema or Mongoose drops it on save.
+    refreshToken: {
+        type: String,
+        default: null,
+        select: false,
+    },
 }, {timestamps: true});
 
 // hashes the password.
